@@ -1,93 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
+<link rel="stylesheet" href="style.css">
+
 <%- include('utils/head') %>
 
-    <body>
+    <body class="body-color">
         <%- include('utils/navbar') %>
-            <br>
-            <div class="container bg-light p-3 mt-4">
-                <div class="row">
-                    <div class="col-sm mt-4">
-                        <div class="card" style="width: 18rem;">
-                            <img style="height: 11rem;" src="images/redes.jpg" alt="redes" class="card-img-top">
-                            <div class="card-body">
-                                <h5 class="card-title">Redes Wireless</h5>
-                                <p class="card-text">
-                                    Hacking de redes Wireless. Se comprometera la seguridad de las claves WEP/WPA/WPA2. Se ejecutaran ataques de deautenticacion, ataques CTS, ataques EvilTwin y ataques a WPS entre otros
-                                </p>
-                                <a href="/redes" class="btn btn-primary">Aprender!</a>
-                            </div>
+
+            <header class="main-container">
+                <div class="sub-main-container">
+                    <div class="pres-container">
+                        <p>Hola, me llamo</p>
+                    </div>
+                    <div class="name-container">
+                        <div class="name">
+                            <h2><strong>Roberto </strong>Morales Fumero</h2>
                         </div>
                     </div>
-
-                    <div class="col-sm mt-4">
-                        <div class="card" style="width: 18rem;">
-                            <img style="height: 11rem;" src="images/phishing.jpg" alt="phising" class="card-img-top">
-                            <div class="card-body">
-                                <h5 class="card-title">Phishing</h5>
-                                <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae id iste perspiciatis beatae eveniet quidem illum quae aut iure libero perferendis, eius vel corrupti similique? Quisquam, quo! Animi, nam harum.</p>
-                                <a href="/" class="btn btn-primary">Aprender!</a>
-                            </div>
-                        </div>
+                    <div class="title-container">
+                        <h3>Y he creado esta guía sobre el <strong>Hacking</strong></h3>
                     </div>
-
-                    <div class="col-sm mt-4">
-                        <div class="card" style="width: 18rem;">
-                            <img style="height: 11rem;" src="images/hardening.jpg" alt="hardening" class="card-img-top">
-                            <div class="card-body">
-                                <h5 class="card-title">Hardening</h5>
-                                <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae id iste perspiciatis beatae eveniet quidem illum quae aut iure libero perferendis, eius vel corrupti similique? Quisquam, quo! Animi, nam harum.</p>
-                                <a href="/" class="btn btn-primary">Aprender!</a>
-                            </div>
-                        </div>
+                    <div class="text-container">
+                        <p><i>Guía Hacking</i> es un proyecto destinado a principiantes que comienzan en la seguridad
+                            informática y el hacking.
+                            Aquí encontraras un gran número de ataques para poder llevarlos acabo y defenderte de ellos.
+                            <i><strong>No me hago
+                                responsable del mal uso que se pueda proporcionar a lo aprendido en esta guía.
+                           </strong></i>
+                        </p>
                     </div>
-
-                    <div class="col-sm mt-4">
-                        <div class="card" style="width: 18rem;">
-                            <img style="height: 11rem;" src="images/igathering.jpg" alt="igathering" class="card-img-top">
-                            <div class="card-body">
-                                <h5 class="card-title">Information Gathering</h5>
-                                <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae id iste perspiciatis beatae eveniet quidem illum quae aut iure libero perferendis, eius vel corrupti similique? Quisquam, quo! Animi, nam harum.</p>
-                                <a href="/" class="btn btn-primary">Aprender!</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-sm mt-4">
-                        <div class="card" style="width: 18rem;">
-                            <img style="height: 11rem;" src="images/analisis.jpg" alt="analisis" class="card-img-top">
-                            <div class="card-body">
-                                <h5 class="card-title">Escaneo y Analisis de vulnerabilidades</h5>
-                                <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae id iste perspiciatis beatae eveniet quidem illum quae aut iure libero perferendis, eius vel corrupti similique? Quisquam, quo! Animi, nam harum.</p>
-                                <a href="/" class="btn btn-primary">Aprender!</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-sm mt-4">
-                        <div class="card" style="width: 18rem;">
-                            <img style="height: 11rem;" src="images/explotacion.jpeg" alt="explotacion" class="card-img-top">
-                            <div class="card-body">
-                                <h5 class="card-title">Explotacion de vulnerabilidades</h5>
-                                <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae id iste perspiciatis beatae eveniet quidem illum quae aut iure libero perferendis, eius vel corrupti similique? Quisquam, quo! Animi, nam harum.</p>
-                                <a href="/" class="btn btn-primary">Aprender!</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-sm mt-4">
-                        <div class="card" style="width: 18rem;">
-                            <img style="height: 11rem;" src="images/post.jpg" alt="explotacion" class="card-img-top">
-                            <div class="card-body">
-                                <h5 class="card-title">Post-Explotacion</h5>
-                                <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae id iste perspiciatis beatae eveniet quidem illum quae aut iure libero perferendis, eius vel corrupti similique? Quisquam, quo! Animi, nam harum.</p>
-                                <a href="/" class="btn btn-primary">Aprender!</a>
-                            </div>
-                        </div>
+                    <div class="button-container">
+                        <a href="/#activities">Explorar</a>
                     </div>
                 </div>
-            </div>
 
+            </header>
+
+            <%- include('utils/activities') %>
+            <section class="footer">
+                <%- include('utils/footer') %>
+            </section>
+            <div class="d-flex align-items-center justify-content-center">
+                <small style="color: var(--blue); font-weight:400; margin-bottom:1rem;">Developed by Roberto Morales, 2021</small>
+            </div>
 
 
     </body>
