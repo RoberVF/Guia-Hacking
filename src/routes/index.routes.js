@@ -5,7 +5,7 @@ route.get('/', (req, res)=>{
     res.render('index.ejs')
 })
 
-//Tenicas
+//Tecnicas
 route.get('/redes', (req, res)=>{
     res.render('pages/redes.ejs')
 })
