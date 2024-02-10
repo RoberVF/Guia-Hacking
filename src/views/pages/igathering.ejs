@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include('../utils/head') %>
+    <link rel="stylesheet" href="css/eachActivity.css">
+    <style>
+        #igathering {
+            background-color: var(--main);
+            padding-top: 3rem;
+        }
+    </style>
+
+    <body>
+        <%- include('../utils/navbar')%>
+
+            <div id="igathering">
+                <section id="footprinting">
+                    <div class="container mt-4">
+                        <h2>Information Gathering / OSINT (Open Source Intelligence)</h2>
+                        <hr>
+                        <div class="">
+                            <p>
+                                En la actualidad, Internet no dispone solamente de información pública, sino también de
+                                información
+                                personal sensible o confidencial, que, en la mayoría de casos, no somos conscientes de
+                                que toda
+                                esa información crítica esta siendo publicada en Internet y a la que cualquiera,
+                                utilizando las
+                                herramientas apropiadas, podría tener acceso. <br>
+                                El éxito de muchos ataques e intrusiones que sufren las empresas y organizaciones se
+                                debe en gran
+                                parte a la cantidad que, directa o indirectamente, un atacante es capaz de obtener sobre
+                                sus sistemas
+                                o empleados.
+                            </p>
+                            <p>
+                                Evidencias recopiladas a partir de fuentes de acceso publico:
+                            <ul>
+                                <li>- Medios de comunicacion</li>
+                                <li>- Informacion publica</li>
+                                <li>- Foros, redes sociales, blogs...</li>
+                                <li>- Conferencias, bibliotecas</li>
+                            </ul>
+                            <hr>
+                            <p>Sus finalidades pueden ser:</p>
+                            <ul class="mt-3">
+                                <li>- Conocer la reputacion online de la victima</li>
+                                <li>- Realizar estudios de la victima</li>
+                                <li>- Evaluar el nivel de privacidad y seguridad</li>
+                                <li>- Conocer aspectos negativos</li>
+                            </ul>
+                            <hr>
+                            El proceso OSINT consta de las siguientes fases:
+                            </p>
+                            <div width="100%" class="p-3 d-flex justify-content-around">
+                                <img src="images/osint.png" alt="osint" width="40%">
+                                <img src="images/osint2.png" alt="osint2" width="40%">
+                            </div>
+
+                        </div>
+                        <div class="rounded p-3 mt-3">
+                            <h3>Footprinting y Fingerprinting</h3>
+                            <p>Tecnicas llevadas a cabo para recopilar toda la informacion publica existente sobre la
+                                aplicacion, sistema e infraestructura
+                                objetivo. El objetivo sera incapaz de detectar que estamos llevando a cabo esta
+                                recopilación
+                                de informacion y se denomina una
+                                busqueda legal ya que son datos publicos.
+                            </p>
+                            <br>
+                            <h4>Passive Footprinting</h4>
+                            <p>Se realiza sin interactuar directamente con el objetivo. Se basa en la busqueda de
+                                informacion publica, recopilando
+                                informacion de Internet, utilizando para ello motores de busqueda, redes sociales,
+                                registros
+                                publicos, etc.
+                            </p>
+                            <div class="border rounded p-3 mt-3">
+                                <h5>Protocolo Whois</h5>
+                                <p>Protocolo TCP que permite realizar consultas a bases de datos. Mediante este metodo
+                                    se
+                                    puede obtener el propietario del dominio,
+                                    la direccion IP, direcciones de correo, fecha de creacion o numero de teléfono.
+                                </p>
+                                <code>whois IP_SERVIDOR</code>
+                            </div>
+                            <div class="border rounded p-3 mt-3">
+                                <h5>Motores de busqueda</h5>
+                                <p>Se realizan haciendo busquedas avanzadas en los diferentes motores de busqueda. Estos
+                                    ataques pasivos
+                                    se pueden realizar a traves de Google o Bing o bien en un buscador específico como
+                                    Shodan.
+                                </p>
+                                <code><strong>"</strong> PALABRA <strong>"</strong></code> <small>-> Palabra o frase
+                                    indispensable</small> <br>
+                                <code>palabras que pueden aparecer <strong>-NO</strong></code> <small>-> Palabra que no
+                                    aparece en la busqueda</small> <br>
+                                <code>palabras que pueden aparecer <strong>(palabra1 OR palabra2)</strong></code>
+                                <small>->
+                                    Varias palabras que deben aparecer en las paginas</small><br>
+                                <code>link:www.name.com</code> <small>-> Buscar un link</small><br>
+                                <code>site:www.name.com PALABRA</code> <small>-> Busca dentro de un dominio la
+                                    palabra</small>
+                                <code>info:www.name.com</code> <small>-> Informacion sobre el dominio</small>
+                                <code>cache:www.name.com</code> <small>-> Ver el dominio como aparecia en su primera
+                                    version</small>
+                                <code>filetype:sql</code> <small>-> Buscar extensiones de archivos</small>
+                            </div>
+                            <div class="border rounded p-3 mt-3">
+                                <h5>Robtex</h5>
+                                <p>Pagina web que permite obtener, sin dejar rastro de algun objetivo, dominios,
+                                    subdominios, servidores DNS... <br>
+                                    Este tipo de consultas se denominan <a
+                                        href="/information-gathering#afootprinting">Active Footprinting</a> pero,
+                                    al realizarse vía web, se lleva a cabo de manera pasiva.
+                                </p>
+                                <code><a href="https://www.robtex.com/" target="_blank">Pagina oficial Robtex</a></code>
+                            </div>
+                            <hr>
+                            <h4 id="afootprinting">Active Footprinting</h4>
+                            <p>Se realiza interactuando con el objetivo mediante consultas DNS, analisis de cabeceras
+                                HTTP,
+                                enumeracion de puertos y servicios
+                                empleando para ello herramientas especializadas contra los recursos tecnológicos del
+                                objetivo.
+                            </p>
+                            <p><strong>Metodos: </strong>Descubrimiento DNS</p>
+                            <div class="border rounded p-3 mt-3">
+                                <h5>NMAP</h5>
+                                <p>
+                                    Nmap es una de las mayores herramientas creadas para el Active Footprinting, creada
+                                    para el escaneo
+                                    de redes y descubrimiento de hosts y servicios en una red informática.
+                                    Con ella, podemos realizar exploraciones de puertos, viendo si estos están abiertos
+                                    o no, detección de
+                                    sistemas operativos, identificación de servicios, etc.
+                                </p>
+                                <code>nmap "DIRECCION_IP_OBJETIVO"</code> <br>
+                                <small>Análisis de los 1024 primeros puertos, rango el cual
+                                    es el predeterminado por Nmap.
+                                    Ahí encontraremos el numero de puerto, si trabaja sobre tcp o udp, el estado del
+                                    puerto
+                                    y el servicio que actua en ese puerto (SSH, DNS, HTTP...).
+                                </small>
+                                <br>
+                                <hr>
+                                <p>Dado a la importancia y profundidad de esta herramienta, en esta guía encontrarás un
+                                    manual dedicado única y
+                                    exclusivamente a Nmap.
+                                </p>
+                                <a href="/nmap">Manual de Nmap</a>
+                            </div>
+                            <div class="border rounded p-3 mt-3">
+                                <h5>Netcat</h5>
+                                <p>Netcat es una herramienta versátil usada para interactuar con conexiones de red.
+                                    Esta puede actuar como un canal de transferencia de datos entre dos sistemas,
+                                    realizar escaneos de puertos, crear conexiones de red, etc.
+                                </p>
+                                <small>Para hacer un escaneo de puertos sencillo a una dirección IP concreta,
+                                    en un rango de puertos concreto:
+                                </small> <br>
+                                <code>nc -zv "DIRECCION_IP_OBJETIVO" "PRIMER_PUERTO"-"ULTIMO PUERTO"</code>
+                                <br>
+                                <hr>
+                                <h6><strong>Transferencia de datos con Netcat</strong></h6>
+                                <p>La transferencia de datos con Netcat implica declarar una máquina como servidor (la
+                                    que recibirá el archivo) y la otra como cliente (la que enviará el archivo), siempre
+                                    y cuando ambas estén en la misma red.
+                                    Debemos de declarar un puerto que no este en uso para dicha transferencia, en este
+                                    caso usaremos el puerto 4444.
+                                </p>
+                                <small><strong>En el servidor:</strong></small> <br>
+                                <code>nc -l -p 4444 > "RECEIVED"</code> <br>
+                                <small>-l: Modo escucha</small><br>
+                                <small>> RECEIVED: redirige la salida a un archivo llamado RECEIVED</small>
+                                <hr>
+                                <small><strong>En el cliente:</strong></small> <br>
+                                <code>nc "DIRECCION_SERVIDOR" 4444 < "ARCHIVO A ENVIAR"</code> <br>
+                                <small>Se enviarán los datos del archivo "ARCHIVO A ENVIAR"</small>
+                                <hr>
+                                <p><strong class="text-danger">Netcat es una herramienta la cual ha sido prácticamente
+                                        sustituida por Ncat, una evolución y mejora de Netcat desarrollada por Nmap.
+                                        El uso de Ncat estará explicado en mayor profundidad en el manual de Nmap:
+                                        <a href="/nmap">Manual de Nmap</a>
+                                    </strong></p>
+                            </div>
+                            <div class="border rounded p-3 mt-3">
+                                <h5>Nikto</h5>
+                                <p>Nikto es una herramienta de escaneo de servidores web diseñada específicamente para 
+                                    identificar posibles vulnerabilidades y problemas de seguridad en servidores web.</p>
+                                <small>Análisis a servidor web:</small> <br>
+                                <code>nikto -h "DIRECCION_IP_OBJETIVO" -p "PUERTO_OBJETIVO" -s -ssl -o "ARCHIVO.txt"</code><br>
+                                <small>-p "PUERTO_OBJETIVO": Puede no definirse o definir un rango</small><br>
+                                <small>-s: Escaneo en modo silencioso</small><br>
+                                <small>-ssl: Servidor que utiliza SSL/TLS</small><br>
+                                <small>-o "ARCHIVO.txt": Guardar los datos del escaneo en un archivo</small><br>
+                                <hr>
+                                <small>Análisis a servidor web con area protegida por autenticación básica: </small> <br>
+                                <code>nikto -h "DIRECCION_IP_OBJETIVO" -id admin:password</code>
+
+                            </div>
+                            <hr>
+                            <h4>Fingerprinting</h4>
+                            <p>Obtencion de la mayor cantidad de informacion posible sobre los servicios Web que se
+                                estan
+                                ejecutando en el sistema objetivo, CMS y
+                                los plugins que se utilicen.
+                            </p>
+                            <code>whatweb -v IP_DOMINIO</code>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="gathering-tools">
+                    <div class="container mt-4">
+                        <h3>Herramientas</h3>
+                        <p>Aqui se presentan varias herramientas las cuales tienen como finalidad el llevar a cabo los
+                            metodos mencionados anteriormente</p>
+                        <div class="p-3 mt-3 rounded">
+                            <div class="border rounded mt-3 p-3">
+                                <h5>Netcraft</h5>
+                                <p>Analisis de paginas web a fondo. Herramienta online</p>
+                                <a href="https://www.netcraft.com" target="_blank" class="text-decoration-none">Sitio
+                                    web de
+                                    Netcraft</a>
+                            </div>
+                            <div class="border rounded mt-3 p-3">
+                                <h5>The Harvester</h5>
+                                <p>Herramienta incluida en los sistemas linux enfocados a la seguridad, la cual tiene
+                                    como
+                                    finalidad
+                                    la busqueda de correos electronicos en la red. El descubrimiento de estos correos
+                                    podria
+                                    comprometer a una determinada empresa mediante ataques de phising.
+                                </p>
+                                <code>theHarvester -d DOMINIO.EXTENSION -b all</code> <small>-> DOMINIO.EXTENSION =
+                                    anaya.es</small> <br> <br>
+                                <a href="https://github.com/laramies/theHarvester" target="_blank"
+                                    class="text-decoration-none">Repositorio de la herramienta</a>
+                            </div>
+                            <div class="border rounded mt-3 p-3">
+                                <h5>Whois</h5>
+                                <p>Herramienta preinstalada en las distro linux orientadas a seguridad informatica y
+                                    online.
+                                    Su finalidad es
+                                    buscar un servidor DNS para identificar la informacion de registro dentro de una
+                                    base de
+                                    datos.
+                                    Esto permite obtener informacion sobre el propietario de un dominio y obtener
+                                    informacion sobre los
+                                    rangos de direcciones IP.
+                                </p>
+                                <code>whois -h SERVIDOR_DNS</code> <br><br>
+                                <p><a href="http://www.reydes.com/d/?q=Consultas_Whois" class="text-decoration-none"
+                                        target="_blank">Guia en profundidad de Whois en linux</a></p>
+                            </div>
+                            <div class="border rounded mt-3 p-3"></div>
+                            <div class="border rounded mt-3 p-3"></div>
+                            <div class="border rounded mt-3 p-3"></div>
+                        </div>
+                    </div>
+                </section>
+
+            </div>
+
+    </body>
+
+</html>

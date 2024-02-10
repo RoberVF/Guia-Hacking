@@ -1,0 +1,44 @@
+[
+    {
+        "name": "Redes Wireless",
+        "description": "Hacking de redes Wireless. Se comprometera la seguridad de las claves WEP/WPA/WPA2. Se ejecutaran ataques de deautenticacion, ataques CTS, ataques EvilTwin y ataques a WPS entre otros",
+        "url": "/redes",
+        "image": "images/redes.jpg"
+    },
+    {
+        "name": "Phising",
+        "description": "Hacking de redes Wireless. Se comprometera la seguridad de las claves WEP/WPA/WPA2. Se ejecutaran ataques de deautenticacion, ataques CTS, ataques EvilTwin y ataques a WPS entre otros",
+        "url": "/",
+        "image": "images/phishing.jpg"
+    },
+    {
+        "name": "Hardening",
+        "description": "Hacking de redes Wireless. Se comprometera la seguridad de las claves WEP/WPA/WPA2. Se ejecutaran ataques de deautenticacion, ataques CTS, ataques EvilTwin y ataques a WPS entre otros",
+        "url": "/",
+        "image": "images/hardening.jpg"
+    },
+    {
+        "name": "Information Gathering",
+        "description": "Hacking de redes Wireless. Se comprometera la seguridad de las claves WEP/WPA/WPA2. Se ejecutaran ataques de deautenticacion, ataques CTS, ataques EvilTwin y ataques a WPS entre otros",
+        "url": "/information-gathering",
+        "image": "images/igathering.jpg"
+    },
+    {
+        "name": "Escaneo y análisis",
+        "description": "Hacking de redes Wireless. Se comprometera la seguridad de las claves WEP/WPA/WPA2. Se ejecutaran ataques de deautenticacion, ataques CTS, ataques EvilTwin y ataques a WPS entre otros",
+        "url": "/",
+        "image": "images/analisis.jpg"
+    },
+    {
+        "name": "Explotación",
+        "description": "Hacking de redes Wireless. Se comprometera la seguridad de las claves WEP/WPA/WPA2. Se ejecutaran ataques de deautenticacion, ataques CTS, ataques EvilTwin y ataques a WPS entre otros",
+        "url": "/",
+        "image": "images/explotacion.jpeg"
+    },
+    {
+        "name": "Post explotación",
+        "description": "Hacking de redes Wireless. Se comprometera la seguridad de las claves WEP/WPA/WPA2. Se ejecutaran ataques de deautenticacion, ataques CTS, ataques EvilTwin y ataques a WPS entre otros",
+        "url": "/",
+        "image": "images/post.jpg"
+    }
+]

@@ -1,0 +1,31 @@
+h5,
+h3,
+h4,
+h2,
+strong {
+    color: var(--blue);
+}
+
+p,
+small,
+li {
+    color: var(--white);
+    list-style: none;
+}
+
+a {
+    text-decoration: none !important;
+    color: var(--blue);
+}
+
+a:hover {
+    color: var(--blue);
+}
+
+.info-container {
+    background-color: var(--main) !important;
+}
+
+.border {
+    border-color: var(--secondary) !important;
+}
