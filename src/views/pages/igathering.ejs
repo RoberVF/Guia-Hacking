@@ -33,31 +33,36 @@
                                 sus sistemas
                                 o empleados.
                             </p>
-                            <p>
-                                Evidencias recopiladas a partir de fuentes de acceso publico:
-                            <ul>
-                                <li>- Medios de comunicacion</li>
-                                <li>- Informacion publica</li>
-                                <li>- Foros, redes sociales, blogs...</li>
-                                <li>- Conferencias, bibliotecas</li>
-                            </ul>
-                            <hr>
-                            <p>Sus finalidades pueden ser:</p>
-                            <ul class="mt-3">
-                                <li>- Conocer la reputacion online de la victima</li>
-                                <li>- Realizar estudios de la victima</li>
-                                <li>- Evaluar el nivel de privacidad y seguridad</li>
-                                <li>- Conocer aspectos negativos</li>
-                            </ul>
-                            <hr>
-                            El proceso OSINT consta de las siguientes fases:
-                            </p>
-                            <div width="100%" class="p-3 d-flex justify-content-around">
-                                <img src="images/osint.png" alt="osint" width="40%">
-                                <img src="images/osint2.png" alt="osint2" width="40%">
+                            <div class="row">
+                                <div class="col-sm-6 d-flex align-items-center">
+                                    <div class="">
+                                        <p>
+                                            Evidencias recopiladas a partir de fuentes de acceso publico:
+                                        <ul>
+                                            <li>- Medios de comunicacion</li>
+                                            <li>- Informacion publica</li>
+                                            <li>- Foros, redes sociales, blogs...</li>
+                                            <li>- Conferencias, bibliotecas</li>
+                                        </ul>
+                                        </p>
+                                        <hr>
+                                        <p>Sus finalidades pueden ser:
+                                        <ul class="mt-3">
+                                            <li>- Conocer la reputacion online de la victima</li>
+                                            <li>- Realizar estudios de la victima</li>
+                                            <li>- Evaluar el nivel de privacidad y seguridad</li>
+                                            <li>- Conocer aspectos negativos</li>
+                                        </ul>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <p>El proceso OSINT consta de las siguientes fases:</p>
+                                    <img src="images/osint.png" alt="osint" width="100%">
+                                </div>
                             </div>
-
                         </div>
+                        <hr>
                         <div class="rounded p-3 mt-3">
                             <h3>Footprinting y Fingerprinting</h3>
                             <p>Tecnicas llevadas a cabo para recopilar toda la informacion publica existente sobre la
@@ -78,15 +83,23 @@
                             <div class="border rounded p-3 mt-3">
                                 <h5>Protocolo Whois</h5>
                                 <p>Protocolo TCP que permite realizar consultas a bases de datos. Mediante este metodo
-                                    se
-                                    puede obtener el propietario del dominio,
-                                    la direccion IP, direcciones de correo, fecha de creacion o numero de teléfono.
+                                    se puede obtener información como el propietario del dominio, la direccion IP,
+                                    direcciones de correo, fecha de creacion o numero de teléfono. <br>
+                                    La Base de Datos de la Zona Raíz representa los detalles para la delegación de
+                                    dominios de nivel superior, incluyendo los gTLDs y los ccTLDs. <br>
+                                    Ejemplos de gTLD (generic Top Level Domain) podrían ser el .com, el .net, el .org
+                                    ...
+                                    mientras que ejemplos de ccTLD (country code Top Level Domain) podrían ser
+                                    .es, .uk, .de ...
                                 </p>
-                                <code>whois IP_SERVIDOR</code>
+                                <small>El uso de whois es extremandamente sencillo, bastaría con hacer esta simple
+                                    consulta para obtener la información del dominio objetivo:
+                                </small>
+                                <code>whois IP_DOMINIO_OBJETIVO</code>
                             </div>
                             <div class="border rounded p-3 mt-3">
-                                <h5>Motores de busqueda</h5>
-                                <p>Se realizan haciendo busquedas avanzadas en los diferentes motores de busqueda. Estos
+                                <h5>Motores de búsqueda</h5>
+                                <p>Se realizan haciendo busquedas avanzadas en los diferentes motores de búsqueda. Estos
                                     ataques pasivos
                                     se pueden realizar a traves de Google o Bing o bien en un buscador específico como
                                     Shodan.
@@ -115,6 +128,70 @@
                                     al realizarse vía web, se lleva a cabo de manera pasiva.
                                 </p>
                                 <code><a href="https://www.robtex.com/" target="_blank">Pagina oficial Robtex</a></code>
+                            </div>
+                            <div class="border rounded p-3 mt-3">
+                                <h5>Nslookup</h5>
+                                <p>Usada en línea de comandos para realizar consultas de DNS y obtener información
+                                    sobre registros DNS para un dominio o dirección IP específica. <br>
+                                    La herramienta es bastante sencilla de usar y muy útil.
+                                </p>
+                                <small>Consulta resolución de nombres: </small>
+                                <code>nslookup SITIO_WEB_OBJETIVO</code> <br>
+                                <small>Consulta resolución de dirección: </small>
+                                <code>nslookup DIRECCIÓN_IP_OBJETIVO</code> <br>
+                                <hr>
+                                <p>A priori, podemos hayar la dirección IP del dominio sabiendo su url o viceversa,
+                                    pero nslookup también nos ofrece cosas más interesantes:
+                                </p>
+                                <small>Podemos realizar consultas específicas para obtener información
+                                    sobre un tipo particular de registro DNS. Los registro DNS son tipos
+                                    específicos de información asociada a un nombre de dominio. Si por ejemplo
+                                    quisieramos utilizar el registro DNS Mail Exchange, el cual nos especifica
+                                    los servidores de correo electrónico utilizados en el dominio: <br>
+                                </small>
+                                <code>nslookup -type=mx SITIO_WEB_OBJETIVO</code>
+                                <hr>
+                                <small>Aparte de esto, también es interesante la opción de cambiar temporalmente
+                                    el servidor al que nslookup envía sus consultas. Para ello, iniciamos nslookup:
+                                </small> <br>
+                                <code>nslookup</code><br>
+                                <small>Ahora cambiaremos nuestro servidor DNS a otro servidor DNS. En caso de no
+                                    saber la dirección de otro servidor DNS, se puede buscar aquí:
+                                    <a
+                                        href="https://www.ionos.es/digitalguide/servidores/know-how/que-es-el-servidor-dns-y-como-funciona/">Lista
+                                        servidores DNS de confianza.</a>
+                                    En este caso, usaremos la dirección del DNS de Google: 8.8.8.8.
+                                </small> <br>
+                                <code>server 8.8.8.8</code> <br>
+                                <small>Ahora, al hacer una consulta a un dominio obtendremos la información
+                                    desde el punto de vista del nuevo servidor DNS, en este caso, el DNS de Google.
+                                </small> <br>
+                                <code>SITIO_WEB_OBJETIVO</code> <br>
+                                <p><i>Si queremos ver a que DNS estamos conectados, bastaría con
+                                        <code>server</code>
+                                    </i></p>
+                            </div>
+                            <div class="border rounded mt-3 p-3">
+                                <h5>Netcraft</h5>
+                                <p>Herramienta en línea creada para rastrear, analizar y obtener información sobre la
+                                    infraestructura tecnológica de un sitio web. <br>
+                                    Dependiendo del uso que se le de a la herramienta se podría considerar de
+                                    footprinting activo o pasivo, en este caso, hablaremos solamente de forma pasiva.
+                                    Estas son algunas de las formas en las que lo podemos utilizar:
+                                <ul>
+                                    <li>- Recolección de datos en servidores web</li>
+                                    <li>- Herramientas de investigación en el navegador</li>
+                                    <li>- Reportes y estadísticas</li>
+                                </ul>
+                                </p>
+                                <a href="https://www.netcraft.com" target="_blank" class="text-decoration-none">Sitio
+                                    web de
+                                    Netcraft</a>
+                                <hr>
+                                <p><i>El principal problema de la herramienta es que no es gratuita y opino que las
+                                        opciones que ofrece se pueden realizar con otras herramientas gratuitas vistas
+                                        en esta guía. Aún así, si hablamos de Footprinting, es obligatorio mencionarlo.
+                                    </i></p>
                             </div>
                             <hr>
                             <h4 id="afootprinting">Active Footprinting</h4>
@@ -180,14 +257,15 @@
                                 <hr>
                                 <p><strong class="text-danger">Netcat es una herramienta la cual ha sido prácticamente
                                         sustituida por Ncat, una evolución y mejora de Netcat desarrollada por Nmap.
-                                        El uso de Ncat estará explicado en mayor profundidad en el manual de Nmap:
+                                        El uso de Ncat estará explicado en profundidad en el manual de Nmap:
                                         <a href="/nmap">Manual de Nmap</a>
                                     </strong></p>
                             </div>
                             <div class="border rounded p-3 mt-3">
                                 <h5>Nikto</h5>
-                                <p>Nikto es una herramienta de escaneo de servidores web diseñada específicamente para 
-                                    identificar posibles vulnerabilidades y problemas de seguridad en servidores web.</p>
+                                <p>Nikto es una herramienta de escaneo de servidores web diseñada específicamente para
+                                    identificar posibles vulnerabilidades y problemas de seguridad en servidores web.
+                                </p>
                                 <small>Análisis a servidor web:</small> <br>
                                 <code>nikto -h "DIRECCION_IP_OBJETIVO" -p "PUERTO_OBJETIVO" -s -ssl -o "ARCHIVO.txt"</code><br>
                                 <small>-p "PUERTO_OBJETIVO": Puede no definirse o definir un rango</small><br>
@@ -195,74 +273,70 @@
                                 <small>-ssl: Servidor que utiliza SSL/TLS</small><br>
                                 <small>-o "ARCHIVO.txt": Guardar los datos del escaneo en un archivo</small><br>
                                 <hr>
-                                <small>Análisis a servidor web con area protegida por autenticación básica: </small> <br>
-                                <code>nikto -h "DIRECCION_IP_OBJETIVO" -id admin:password</code>
-
-                            </div>
-                            <hr>
-                            <h4>Fingerprinting</h4>
-                            <p>Obtencion de la mayor cantidad de informacion posible sobre los servicios Web que se
-                                estan
-                                ejecutando en el sistema objetivo, CMS y
-                                los plugins que se utilicen.
-                            </p>
-                            <code>whatweb -v IP_DOMINIO</code>
-                        </div>
-                    </div>
-                </section>
-
-                <section id="gathering-tools">
-                    <div class="container mt-4">
-                        <h3>Herramientas</h3>
-                        <p>Aqui se presentan varias herramientas las cuales tienen como finalidad el llevar a cabo los
-                            metodos mencionados anteriormente</p>
-                        <div class="p-3 mt-3 rounded">
-                            <div class="border rounded mt-3 p-3">
-                                <h5>Netcraft</h5>
-                                <p>Analisis de paginas web a fondo. Herramienta online</p>
-                                <a href="https://www.netcraft.com" target="_blank" class="text-decoration-none">Sitio
-                                    web de
-                                    Netcraft</a>
+                                <small>Análisis a servidor web con área protegida por autenticación básica: </small>
+                                <br>
+                                <code>nikto -h "DIRECCION_IP_OBJETIVO" -id admin:password</code><br>
+                                <br>
+                                <small>Actualmente, Nikto no permite el uso de diccionarios de forma directa
+                                    pero podemos hacer un simple script en bash para aplicarle un diccionario
+                                    de la forma user:password.
+                                </small> <br>
+                                <code>
+                                        while IFS= read -r line; do <br>
+                                        &nbsp;&nbsp;nikto -h "DIRECCION_IP_OBJETIVO" -id "$line" <br>
+                                        done < diccionario.txt <br>
+                                    </code>
+                                <p>Si necesitas ayuda sobre como crear un diccionario, visita
+                                    el manual de Crunch: <a href="/herramientas/crunch">Manual de Crunch</a>
+                                </p>
                             </div>
                             <div class="border rounded mt-3 p-3">
                                 <h5>The Harvester</h5>
                                 <p>Herramienta incluida en los sistemas linux enfocados a la seguridad, la cual tiene
-                                    como
-                                    finalidad
-                                    la busqueda de correos electronicos en la red. El descubrimiento de estos correos
-                                    podria
-                                    comprometer a una determinada empresa mediante ataques de phising.
+                                    como finalidad la búsqueda de correos electrónicos, nombres de dominio,
+                                    subdominios y direcciones IP en la red. El descubrimiento de esta información podrá
+                                    ser
+                                    de gran valor en la fase de explotación.
                                 </p>
-                                <code>theHarvester -d DOMINIO.EXTENSION -b all</code> <small>-> DOMINIO.EXTENSION =
-                                    anaya.es</small> <br> <br>
+                                <code>theHarvester -d DOMINIO_OBJETIVO -l 400 -b all -t</code> <br>
+                                <small><strong>-d DOMINIO_OBJETIVO</strong>: Url del dominio objetivo</small> <br>
+                                <small><strong>-l 400</strong>: Limita la cantidad de resultados a 400</small> <br>
+                                <small><strong>-b all</strong>: Utiliza todos los motores de búsqueda
+                                    disponibles</small>
+                                <small><strong>-t</strong>: Realiza la búsqueda de subdominios</small>
+                                <hr>
+                                <p><i>Si queremos ejecutarlo en un modo "silencioso", debemos bajar la cantidad
+                                        de resultados (a 100 por ejemplo) y usar un solo un motor de búsqueda (google
+                                        por ejemplo).
+                                    </i></p>
+
                                 <a href="https://github.com/laramies/theHarvester" target="_blank"
                                     class="text-decoration-none">Repositorio de la herramienta</a>
                             </div>
-                            <div class="border rounded mt-3 p-3">
-                                <h5>Whois</h5>
-                                <p>Herramienta preinstalada en las distro linux orientadas a seguridad informatica y
-                                    online.
-                                    Su finalidad es
-                                    buscar un servidor DNS para identificar la informacion de registro dentro de una
-                                    base de
-                                    datos.
-                                    Esto permite obtener informacion sobre el propietario de un dominio y obtener
-                                    informacion sobre los
-                                    rangos de direcciones IP.
-                                </p>
-                                <code>whois -h SERVIDOR_DNS</code> <br><br>
-                                <p><a href="http://www.reydes.com/d/?q=Consultas_Whois" class="text-decoration-none"
-                                        target="_blank">Guia en profundidad de Whois en linux</a></p>
-                            </div>
-                            <div class="border rounded mt-3 p-3"></div>
-                            <div class="border rounded mt-3 p-3"></div>
-                            <div class="border rounded mt-3 p-3"></div>
+                            <hr>
+                            <h4>Fingerprinting</h4>
+                            <p>Obtención de la mayor cantidad de información posible sobre los servicios Web que se
+                                están ejecutando en el sistema objetivo, el Sistema de Control de Contenido (CMS),
+                                el servidor web y su lenguaje de programación, plugins utilizados, etc.
+                            </p>
+                            <code>whatweb -v IP_DOMINIO</code>
+                            <hr>
+                            <p>Si hablamos de Fingerprinting inmediatamente aparece la herramienta
+                                <strong>Wappalyzer</strong>, la cual nos permite tener acceso a todas las ventajas
+                                que nos proporciona el Fingerprinting pero desde una extensión del navegador. Una vez
+                                instalada esta extensión bastará con acceder a cualquier sitio web y automáticamente
+                                esta nos proporcionará toda la información posible sobre dicho sitio.<br>
+                                <a href="https://www.wappalyzer.com/">Página web de Wappalyzer</a>
+                            </p>
+                            <p><i>Personalmente, creo que whatweb es una herramienta más potente
+                                    que Wappalyzer aunque al ser tan sencilla de usar y comprender su
+                                    análisis, nunca está mal tenerla a mano en el buscador.
+                                </i></p>
                         </div>
                     </div>
                 </section>
-
+                <section class="p-4"></section>
             </div>
-
     </body>
 
 </html>

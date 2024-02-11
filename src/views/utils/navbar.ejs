@@ -1,71 +1,78 @@
 <style>
-  .navbar-menu{
+  .navbar-menu {
     background-color: var(--main) !important;
   }
-  .navbar-brand{
+
+  .navbar-brand {
     padding: .3rem 1.5rem .3rem 1.5rem;
     color: var(--white) !important;
     border-radius: 3px;
     letter-spacing: -1px;
     word-spacing: -1px;
     font-weight: 300;
-    background-image: linear-gradient(to right, rgba(81, 149, 153, 1), rgba(0,173,181,0) 45%) !important;
+    background-image: linear-gradient(to right, rgba(81, 149, 153, 1), rgba(0, 173, 181, 0) 45%) !important;
     transition: .4s ease-in-out;
   }
-  .navbar-brand:hover{
+
+  .navbar-brand:hover {
     background-color: var(--blue);
   }
-  .nav-link{
+
+  .nav-link {
     color: var(--white) !important;
   }
 </style>
 
-<nav class="navbar-menu navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="/">Guia Hacking</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-  
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav ml-auto">
-        <li class="nav-item active">
-          <a class="nav-link mr-2" href="/redes">Redes<span class="sr-only">(current)</span></a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link mr-2" href="#">Phising</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link mr-2" href="#">Hardening</a>
-        </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle mr-2" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Tecnicas
-          </a>
-          <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-            <a href="/information-gathering" class="dropdown-item">Information Gathering</a>
-            <a class="dropdown-item">Escaneo y Analisis</a>
-            <a class="dropdown-item">Explotacion</a>
-            <a class="dropdown-item">Post-explotacion</a>
-        </div>
-        </li>
-        <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle mr-2" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Herramientas
-            </a>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                <a class="dropdown-item">Nmap</a>
-                <a class="dropdown-item">Git</a>
-                <a class="dropdown-item">Malduino</a>
-                <a class="dropdown-item">Diccionarios</a>
-                <a class="dropdown-item">John The Ripper</a>
-                <a class="dropdown-item">GoLismero</a>
-                <a class="dropdown-item">Aircrack-ng</a>
-                <a href="/herramientas/#bettercap" class="dropdown-item">Bettercap</a>
-                <!--Networking. ARP Poisoning -->
-                <a href="/herramientas/#macchanger" class="dropdown-item">Macchanger</a> <!-- Introduccion networking -->
-            </div>
-          </li>
-      </ul>
+<nav class="navbar-menu navbar navbar-expand-lg navbar-light bg-light sticky-top">
+  <a class="navbar-brand" href="/">Guia Hacking</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
 
-    </div>
-  </nav>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item active">
+        <a class="nav-link mr-2" href="/redes">Redes<span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link mr-2" href="#">Phising</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link mr-2" href="#">Hardening</a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle mr-2" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false">
+          Tecnicas
+        </a>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+          <a href="/information-gathering" class="dropdown-item">Information Gathering</a>
+          <a class="dropdown-item">Escaneo y Analisis</a>
+          <a class="dropdown-item">Explotacion</a>
+          <a class="dropdown-item">Post-explotacion</a>
+        </div>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle mr-2" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false">
+          Herramientas
+        </a>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+          <a class="dropdown-item">Nmap</a>
+          <a class="dropdown-item">Git</a>
+          <a class="dropdown-item">Malduino</a>
+          <a class="dropdown-item">Diccionarios</a>
+          <a class="dropdown-item">John The Ripper</a>
+          <a class="dropdown-item">GoLismero</a>
+          <a class="dropdown-item">Aircrack-ng</a>
+          <a href="/herramientas/bettercap" class="dropdown-item">Bettercap</a>
+          <!--Networking. ARP Poisoning -->
+          <a href="/herramientas/macchanger" class="dropdown-item">Macchanger</a> <!-- Introduccion networking -->
+          <a href="/herramientas/crunch" class="dropdown-item">Crunch</a>
+        </div>
+      </li>
+    </ul>
+
+  </div>
+</nav>
