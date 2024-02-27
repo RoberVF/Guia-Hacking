@@ -1,4 +1,4 @@
-# Mi Proyecto
+# GUIA-HACKING
 
 Este repositorio alberga la evolución de la aplicacion GUIA-HACKING, una plataforma desarrollada inicialmente con JavaScript, CSS y EJS para el frontend, y Node.js con Express para el backend.
 
